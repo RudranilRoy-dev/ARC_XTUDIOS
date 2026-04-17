@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const target = +el.dataset.t;
             let count = 0;
 
-            const duration = 4000; // ⏳ total time (2 seconds)
+            const duration = 10000; // ⏳ total time (2 seconds)
             const increment = target / (duration / 16); // smooth frame-based
 
             function update() {

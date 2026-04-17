@@ -212,8 +212,8 @@ button,
 }
 
 .logo-circle {
-  width: 38px;
-  height: 38px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   object-fit: cover;
   border: 1px solid var(--line);
@@ -1463,11 +1463,12 @@ button,
 }
 
 .footer-logo-img {
-  width: 36px;
-  height: 36px;
+  width: 43px;
+  height: 43px;
   border-radius: 50%;
   object-fit: cover;
   border: 1px solid var(--line);
+  filter: brightness(.85);
   padding: 3px;
   background: rgba(255, 255, 255, .03);
 }

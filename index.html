@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>arc_xtudios — Photography Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- MOBILE MENU -->
+  <div class="mob-menu" id="mobMenu">
+    <span id="mob-close" onclick="closeMob()">✕</span>
+    <a href="#" onclick="go('home');closeMob()">Home</a>
+    <a href="#" onclick="go('portfolio');closeMob()">Portfolio</a>
+    <a href="#" onclick="go('about');closeMob()">About</a>
+    <a href="#" onclick="go('services');closeMob()">Services</a>
+    <a href="#" onclick="go('stories');closeMob()">Stories</a>
+    <a href="#" onclick="go('contact');closeMob()">Contact</a>
+  </div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" class="nav-brand" onclick="go('home');return false;">
+      <div class="brand-wrap">
+        <img src="Images/Logo.jpeg" alt="arc_xtudios logo" class="logo-circle">
+        <span class="brand-name">ARC<span>_XTUDIOS</span></span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#" class="active" data-p="home" onclick="go('home');return false;">Home</a></li>
+      <li><a href="#" data-p="portfolio" onclick="go('portfolio');return false;">Portfolio</a></li>
+      <li><a href="#" data-p="about" onclick="go('about');return false;">About</a></li>
+      <li><a href="#" data-p="services" onclick="go('services');return false;">Services</a></li>
+      <li><a href="#" data-p="stories" onclick="go('stories');return false;">Stories</a></li>
+    </ul>
+    <a href="#" class="nav-cta" onclick="go('contact');return false;">Book a Shoot</a>
+    <div class="hamburger" id="ham" onclick="document.getElementById('ham').addEventListener('click', toggleMenu);">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- ════════════ STAGE ════════════ -->
+  <div id="stage">
+
+    <!-- ══════════════════════════════
+         PAGE · HOME  (expanded)
+    ══════════════════════════════ -->
+    <div class="pg active" id="pg-home">
+
+      <!-- 1. HERO SLIDESHOW -->
+      <div class="home-hero">
+        <div class="hero-imgs">
+          <div class="hero-img show"></div>
+          <div class="hero-img"></div>
+          <div class="hero-img"></div>
+          <div class="hero-img"></div>
+        </div>
+        <div class="hero-veil"></div>
+        <div class="hero-content">
+          <div class="hero-left">
+            <span class="hero-eyebrow">arc_xtudios · Est. 2024</span>
+            <h1 class="hero-h1">
+              We Capture<br>
+              What Words<br>
+              <em>Cannot</em>
+            </h1>
+          </div>
+          <div class="hero-right">
+            <p class="hero-sub">Cinematic photography for weddings, portraits &amp; creative storytelling. Every frame
+              is a feeling — forever.</p>
+            <div class="hero-btns">
+              <button class="btn-hero-fill" onclick="go('portfolio')">View Work</button>
+              <button class="btn-hero-ghost" onclick="go('contact')">Book a Shoot</button>
+            </div>
+          </div>
+        </div>
+        <div class="hero-dots">
+          <div class="hdot on" onclick="setSlide(0)"></div>
+          <div class="hdot" onclick="setSlide(1)"></div>
+          <div class="hdot" onclick="setSlide(2)"></div>
+          <div class="hdot" onclick="setSlide(3)"></div>
+        </div>
+        <!-- scroll cue -->
+        <div class="hero-scroll-cue">
+          <span>Scroll</span>
+          <div class="scroll-line"></div>
+        </div>
+      </div>
+
+      <!-- 2. STATS STRIP -->
+      <div class="home-strip">
+        <div class="strip-stat">
+          <div class="strip-n" data-t="500">0</div>
+          <div class="strip-l">Sessions</div>
+        </div>
+        <div class="strip-stat">
+          <div class="strip-n" data-t="200">0</div>
+          <div class="strip-l">Weddings</div>
+        </div>
+        <div class="strip-stat">
+          <div class="strip-n" data-t="98">0</div>
+          <div class="strip-l">% Satisfaction</div>
+        </div>
+        <div class="strip-stat">
+          <div class="strip-n" data-t="6">0</div>
+          <div class="strip-l">Years</div>
+        </div>
+      </div>
+
+      <!-- 3. FEATURED WORK -->
+      <div class="home-featured">
+        <div class="sec-header">
+          <div>
+            <span class="sec-eyebrow">Selected Work</span>
+            <h2 class="sec-h">Stories We've <em>Told</em></h2>
+          </div>
+          <a href="#" class="sec-link" onclick="go('portfolio');return false;">View All →</a>
+        </div>
+        <div class="feat-grid">
+          <div class="feat-cell" onclick="go('portfolio')">
+            <img src="Images/IMG-20260413-WA0033.jpg" alt="Wedding" loading="lazy">
+            <div class="feat-label"><span class="feat-cat">Wedding</span>
+              <div class="feat-name">A Love Eternal</div>
+            </div>
+          </div>
+          <div class="feat-cell" onclick="go('portfolio')">
+            <img src="Images/IMG-20260413-WA0026.jpg" alt="Portrait" loading="lazy">
+            <div class="feat-label"><span class="feat-cat">Portrait</span>
+              <div class="feat-name">Authentic Self</div>
+            </div>
+          </div>
+          <div class="feat-cell" onclick="go('portfolio')">
+            <img src="Images/_DSC4749.jpeg" alt="Creative" loading="lazy">
+            <div class="feat-label"><span class="feat-cat">Creative</span>
+              <div class="feat-name">Editorial Vision</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. OXFORD-STYLE EDITORIAL INTRO -->
+      <section class="home-editorial">
+        <div class="editorial-inner">
+          <div class="editorial-text">
+            <span class="sec-eyebrow">Our Philosophy</span>
+            <h2 class="editorial-h">Photography is not<br>a <em>craft</em> — it is a<br>conversation.</h2>
+            <div class="editorial-rule"></div>
+            <p class="editorial-p">Every image we make carries the weight of a moment that will never return. We
+              approach each session as a collaboration — listening first, framing second, and always letting emotion
+              lead the lens.</p>
+            <p class="editorial-p">Based in Kolkata, we travel across India and the world for couples, creators and
+              brands who value the art of the image above all else.</p>
+            <button class="btn-editorial" onclick="go('about')">Read Our Story →</button>
+          </div>
+          <div class="editorial-image">
+            <img src="Images/IMG-20260413-WA0013.jpg" alt="Studio" loading="lazy">
+            <div class="editorial-img-caption">
+              <span class="eic-label">Shantiniketan, India</span>
+              <span class="eic-text">Where every frame begins with a feeling</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. SERVICES PREVIEW (Oxford card grid) -->
+      <section class="home-services-prev">
+        <div class="hsp-header">
+          <span class="sec-eyebrow">What We Offer</span>
+          <h2 class="sec-h">Sessions for <em>Every Story</em></h2>
+        </div>
+        <div class="hsp-grid">
+          <div class="hsp-card" onclick="go('services')">
+            <div class="hsp-card-num">01</div>
+            <div class="hsp-card-img">
+              <img src="Images/IMG-20260413-WA0034.jpg" alt="Wedding" loading="lazy">
+            </div>
+            <div class="hsp-card-body">
+              <div class="hsp-card-title">Wedding Photography</div>
+              <p class="hsp-card-desc">Full-day cinematic coverage from morning rituals to the final dance.</p>
+              <span class="hsp-card-link">Explore →</span>
+            </div>
+          </div>
+          <div class="hsp-card" onclick="go('services')">
+            <div class="hsp-card-num">02</div>
+            <div class="hsp-card-img">
+              <img src="Images/IMG-20260413-WA0026.jpg" alt="Portrait" loading="lazy">
+            </div>
+            <div class="hsp-card-body">
+              <div class="hsp-card-title">Portrait &amp; Branding</div>
+              <p class="hsp-card-desc">Individual and personal branding portraits that reveal authentic identity.</p>
+              <span class="hsp-card-link">Explore →</span>
+            </div>
+          </div>
+          <div class="hsp-card" onclick="go('services')">
+            <div class="hsp-card-num">03</div>
+            <div class="hsp-card-img">
+              <img src="Images/_DSC4733.jpeg" alt="Creative" loading="lazy">
+            </div>
+            <div class="hsp-card-body">
+              <div class="hsp-card-title">Creative &amp; Fashion</div>
+              <p class="hsp-card-desc">Editorial and conceptual shoots for models, creators and brands.</p>
+              <span class="hsp-card-link">Explore →</span>
+            </div>
+          </div>
+          <div class="hsp-card hsp-card-cta" onclick="go('services')">
+            <div class="hsp-cta-inner">
+              <p class="hsp-cta-text">"Your moments deserve to be remembered beautifully."</p>
+              <button class="btn-hero-fill" style="margin-top:28px;">See All Services</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. PROCESS SECTION (Oxford numbered editorial) -->
+      <section class="home-process">
+        <div class="process-header">
+          <span class="sec-eyebrow">How We Work</span>
+          <h2 class="sec-h">A Session with <em>arc_xtudios</em></h2>
+        </div>
+        <div class="process-steps">
+          <div class="pstep">
+            <div class="pstep-num">01</div>
+            <div class="pstep-body">
+              <h3 class="pstep-title">Discovery Call</h3>
+              <p class="pstep-text">We begin by listening. A 20-minute conversation to understand your vision, timeline,
+                location, and the feeling you want your images to carry.</p>
+            </div>
+          </div>
+          <div class="pstep-divider"></div>
+          <div class="pstep">
+            <div class="pstep-num">02</div>
+            <div class="pstep-body">
+              <h3 class="pstep-title">Creative Planning</h3>
+              <p class="pstep-text">We craft a personalised shoot plan — scouting locations, mapping light conditions,
+                and preparing a mood reference that matches your story.</p>
+            </div>
+          </div>
+          <div class="pstep-divider"></div>
+          <div class="pstep">
+            <div class="pstep-num">03</div>
+            <div class="pstep-body">
+              <h3 class="pstep-title">The Session</h3>
+              <p class="pstep-text">On the day, we guide you naturally — no stiff poses, no forced smiles. Just real
+                moments, beautifully composed and lit with intention.</p>
+            </div>
+          </div>
+          <div class="pstep-divider"></div>
+          <div class="pstep">
+            <div class="pstep-num">04</div>
+            <div class="pstep-body">
+              <h3 class="pstep-title">Delivery</h3>
+              <p class="pstep-text">Your gallery is hand-edited and delivered within 3–4 weeks via a private online
+                gallery — ready to download, print and treasure forever.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. PULL QUOTE / FEATURED TESTIMONIAL -->
+      <section class="home-pullquote">
+        <div class="review-slider">
+
+          <div class="review-slide active">
+            <p class="review-text">
+              They didn't just photograph our wedding — they preserved our love in a way no words ever could.
+            </p>
+            <div class="review-author">Rahul & Priya Mehta</div>
+          </div>
+        
+          <div class="review-slide">
+            <p class="review-text">
+              Every frame felt like a movie scene. The emotions, the light — everything was perfect.
+            </p>
+            <div class="review-author">Arjun & Meera Kapoor</div>
+          </div>
+        
+          <div class="review-slide">
+            <p class="review-text">
+              We didn’t just get photos, we got memories we’ll cherish forever.
+            </p>
+            <div class="review-author">Anika Singh</div>
+          </div>
+          <div class="review-dots">
+            <div class="rdot active" onclick="goReview(0)"></div>
+            <div class="rdot" onclick="goReview(1)"></div>
+            <div class="rdot" onclick="goReview(2)"></div>
+          </div>
+        
+        </div>
+      </section>
+
+      <!-- 8. LATEST STORIES — Oxford news-grid style -->
+      <section class="home-news">
+        <div class="home-news-header">
+          <div>
+            <span class="sec-eyebrow">From the Studio</span>
+            <h2 class="sec-h">Notes &amp; <em>Narratives</em></h2>
+          </div>
+          <a href="#" class="sec-link" onclick="go('stories');return false;">All Stories →</a>
+        </div>
+        <div class="news-grid">
+          <div class="news-card news-card-hero">
+            <div class="nc-img">
+              <img src="Images/_DSC4878.jpeg" alt="" loading="lazy">
+              <span class="nc-tag">Wedding</span>
+            </div>
+            <div class="nc-body">
+              <span class="nc-date">April 2025</span>
+              <h3 class="nc-title">A Golden Evening in Udaipur — When Light Met Love</h3>
+              <p class="nc-excerpt">The sun dipped below the Aravalli hills and everything turned to gold. Riya and
+                Sameer had chosen Udaipur for a reason — and the images proved why.</p>
+              <a href="#" class="nc-read" onclick="go('portfolio');return false;">View Gallery →</a>
+            </div>
+          </div>
+          <div class="news-card">
+            <div class="nc-img">
+              <img src="Images/IMG-20260413-WA0010.jpg" alt="" loading="lazy">
+              <span class="nc-tag">Portrait</span>
+            </div>
+            <div class="nc-body">
+              <span class="nc-date">March 2025</span>
+              <h3 class="nc-title">The Art of the Quiet Portrait</h3>
+              <p class="nc-excerpt">Not every powerful image needs drama. Some of our finest work lives in stillness.
+              </p>
+              <a href="#" class="nc-read" onclick="go('portfolio');return false;">Read More →</a>
+            </div>
+          </div>
+          <div class="news-card">
+            <div class="nc-img">
+              <img src="Images/IMG-20260413-WA0033.jpg" alt="" loading="lazy">
+              <span class="nc-tag">Behind the Lens</span>
+            </div>
+            <div class="nc-body">
+              <span class="nc-date">February 2025</span>
+              <h3 class="nc-title">How We Prepare for a Wedding Day</h3>
+              <p class="nc-excerpt">Our three-day pre-wedding ritual — location walks, light mapping, and a calm mind.
+              </p>
+              <a href="#" class="nc-read" onclick="go('services');return false;">Read More →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9. INSTAGRAM STRIP -->
+      <section class="home-insta">
+        <div class="insta-label">
+          <span class="sec-eyebrow">Instagram</span>
+          <h3 class="insta-h">
+            Follow 
+            <a href="https://instagram.com/arc_xtudios" target="_blank" class="insta-link">
+              @arc_xtudios ↗
+            </a>
+          </h3>
+        </div>
+        <div class="insta-strip">
+          <div class="insta-cell"><img src="Images/IMG-20260413-WA0033.jpg" alt="" loading="lazy">
+            <div class="insta-hover">📷</div>
+          </div>
+          <div class="insta-cell"><img src="Images/IMG-20260413-WA0026.jpg" alt="" loading="lazy">
+            <div class="insta-hover">📷</div>
+          </div>
+          <div class="insta-cell"><img src="Images/_DSC4733.jpeg" alt="" loading="lazy">
+            <div class="insta-hover">📷</div>
+          </div>
+          <div class="insta-cell"><img src="Images/IMG-20260413-WA0034.jpg" alt="" loading="lazy">
+            <div class="insta-hover">📷</div>
+          </div>
+          <div class="insta-cell"><img src="Images/IMG-20260413-WA0010.jpg" alt="" loading="lazy">
+            <div class="insta-hover">📷</div>
+          </div>
+          <div class="insta-cell"><img src="Images/_DSC4878.jpeg" alt="" loading="lazy">
+            <div class="insta-hover">📷</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10. BOOKING CTA BAND -->
+      <section class="home-cta-band">
+        <div class="cta-band-inner">
+          <span class="sec-eyebrow" style="color:var(--gold)">Ready to Begin?</span>
+          <h2 class="cta-band-h">Let's create something<br><em>you'll never forget.</em></h2>
+          <div class="cta-band-btns">
+            <button class="btn-hero-fill" onclick="go('contact')">Book a Shoot</button>
+            <a href="https://wa.me/+918927907575" target="_blank" class="btn-hero-ghost">💬 WhatsApp</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 11. FOOTER -->
+      <footer class="site-footer">
+        <div class="footer-top">
+
+          <div class="footer-brand-col">
+            <div class="footer-brand">
+              <img src="Images/Logo.jpeg" alt="arc_xtudios" class="footer-logo-img">
+              <span class="footer-brand-name">ARC<span>_XTUDIOS</span></span>
+            </div>
+            <p class="footer-tagline">Framing Stories.<br>Capturing Moments.</p>
+            <p class="footer-about-text">A creative photography studio based in Kolkata, India — specialising in
+              weddings, portraits and cinematic storytelling since 2024.</p>
+            <div class="footer-socials">
+              <a href="#" class="fsoc" title="Instagram">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="2" y="2" width="20" height="20" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                </svg>
+              </a>
+              <a href="#" class="fsoc" title="YouTube">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path
+                    d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+                  <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none" />
+                </svg>
+              </a>
+              <a href="#" class="fsoc" title="Facebook">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                </svg>
+              </a>
+              <a href="#" class="fsoc" title="WhatsApp">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path
+                    d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="footer-nav-col">
+            <h4 class="footer-col-h">Navigate</h4>
+            <ul>
+              <li><a href="#" onclick="go('home');return false;">Home</a></li>
+              <li><a href="#" onclick="go('portfolio');return false;">Portfolio</a></li>
+              <li><a href="#" onclick="go('about');return false;">About Us</a></li>
+              <li><a href="#" onclick="go('services');return false;">Services</a></li>
+              <li><a href="#" onclick="go('stories');return false;">Client Stories</a></li>
+              <li><a href="#" onclick="go('contact');return false;">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-nav-col">
+            <h4 class="footer-col-h">Services</h4>
+            <ul>
+              <li><a href="#" onclick="go('services');return false;">Wedding Photography</a></li>
+              <li><a href="#" onclick="go('services');return false;">Pre-Wedding Shoots</a></li>
+              <li><a href="#" onclick="go('services');return false;">Portrait Sessions</a></li>
+              <li><a href="#" onclick="go('services');return false;">Event Coverage</a></li>
+              <li><a href="#" onclick="go('services');return false;">Creative &amp; Fashion</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-contact-col">
+            <h4 class="footer-col-h">Contact Us</h4>
+            <div class="footer-contact-item">
+              <span class="fci-label">Location</span>
+              <span class="fci-val">Shantiniketan, Bolpur, West Bengal, India</span>
+            </div>
+            <div class="footer-contact-item">
+              <span class="fci-label">WhatsApp / Call</span>
+              <a href="tel:+919800000000" class="fci-val fci-link">+91 8927907575</a>
+            </div>
+            <div class="footer-contact-item">
+              <span class="fci-label">Email</span>
+              <a href="mailto:hello@arcxtudios.com" class="fci-val fci-link">hello@arcxtudios.com</a>
+            </div>
+            <div class="footer-contact-item">
+              <span class="fci-label">Working Hours</span>
+              <span class="fci-val">Mon – Sat, 10am – 7pm</span>
+            </div>
+            <button class="footer-book-btn" onclick="go('contact')">Book a Shoot →</button>
+          </div>
+
+        </div>
+
+        <!-- footer bottom bar -->
+        <div class="footer-bottom">
+          <span class="footer-copy">© 2025 arc_xtudios. All rights reserved.</span>
+          <div class="footer-bottom-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+            <a href="#">Sitemap</a>
+          </div>
+          <span class="footer-made">Made with ♥ in Shantiniketan</span>
+        </div>
+      </footer>
+
+    </div><!-- /pg-home -->
+
+    <!-- ══ PAGE · PORTFOLIO ══ -->
+    <div class="pg" id="pg-portfolio">
+      <div class="port-hero">
+        <div class="port-hero-bg"></div>
+        <div class="port-hero-text">
+          <span class="sec-eyebrow">Our Work</span>
+          <h2 class="port-hero-h">Frames That <em>Speak</em></h2>
+        </div>
+      </div>
+      <div class="port-body">
+        <div class="port-cats">
+          <button class="cat-btn on" data-f="all">All</button>
+          <button class="cat-btn" data-f="wedding">Weddings</button>
+          <button class="cat-btn" data-f="portrait">Portraits</button>
+          <button class="cat-btn" data-f="event">Events</button>
+          <button class="cat-btn" data-f="creative">Creative</button>
+        </div>
+        <div class="gallery">
+          <div class="gcell tall" data-c="wedding" onclick="openLb(this)">
+            <img src="Images/IMG-20260413-WA0033.jpg" alt="" loading="lazy">
+            <div class="gcell-over">
+              <div><span class="gcell-cat">Wedding</span>
+                <div class="gcell-name">Forever Begins Here</div>
+              </div>
+            </div>
+          </div>
+          <div class="gcell" data-c="portrait" onclick="openLb(this)">
+            <img src="Images/IMG-20260413-WA0026.jpg" alt="" loading="lazy">
+            <div class="gcell-over">
+              <div><span class="gcell-cat">Portrait</span>
+                <div class="gcell-name">Authentic Self</div>
+              </div>
+            </div>
+          </div>
+          <div class="gcell" data-c="creative" onclick="openLb(this)">
+            <img src="Images/_DSC4733.jpeg" alt="" loading="lazy">
+            <div class="gcell-over">
+              <div><span class="gcell-cat">Creative</span>
+                <div class="gcell-name">Editorial Mood</div>
+              </div>
+            </div>
+          </div>
+          <div class="gcell" data-c="wedding" onclick="openLb(this)">
+            <img src="Images/IMG-20260413-WA0034.jpg" alt="" loading="lazy">
+            <div class="gcell-over">
+              <div><span class="gcell-cat">Wedding</span>
+                <div class="gcell-name">Golden Ceremony</div>
+              </div>
+            </div>
+          </div>
+          <div class="gcell tall" data-c="portrait" onclick="openLb(this)">
+            <img src="Images/IMG-20260413-WA0010.jpg" alt="" loading="lazy">
+            <div class="gcell-over">
+              <div><span class="gcell-cat">Portrait</span>
+                <div class="gcell-name">Identity &amp; Glow</div>
+              </div>
+            </div>
+          </div>
+          <div class="gcell" data-c="event" onclick="openLb(this)">
+            <img src="Images/_DSC4878.jpeg" alt="" loading="lazy">
+            <div class="gcell-over">
+              <div><span class="gcell-cat">Event</span>
+                <div class="gcell-name">Grand Celebration</div>
+              </div>
+            </div>
+          </div>
+          <div class="gcell" data-c="creative" onclick="openLb(this)">
+            <img src="Images/_DSC4749.jpeg" alt="" loading="lazy">
+            <div class="gcell-over">
+              <div><span class="gcell-cat">Creative</span>
+                <div class="gcell-name">Fashion Study</div>
+              </div>
+            </div>
+          </div>
+          <div class="gcell" data-c="wedding" onclick="openLb(this)">
+            <img src="Images/IMG-20260413-WA0013.jpg" alt="" loading="lazy">
+            <div class="gcell-over">
+              <div><span class="gcell-cat">Pre-Wedding</span>
+                <div class="gcell-name">Love Stories</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PAGE · ABOUT ══ -->
+    <div class="pg" id="pg-about">
+      <div class="about-hero">
+        <div class="about-hero-img"></div>
+        <div class="about-hero-text">
+          <span class="sec-eyebrow">Our Story</span>
+          <h2 class="about-h">The Story Behind<br><em>arc_xtudios</em></h2>
+          <p class="about-lead">A creative studio built on the belief that every photograph should move you — long after
+            the moment has passed.</p>
+        </div>
+      </div>
+      <div class="about-body-section">
+        <div class="about-grid">
+          <div class="about-copy">
+            <p>arc_xtudios is built on a passion for storytelling through visuals. Every frame is crafted to capture
+              <strong>emotion, detail, and authenticity.</strong></p>
+            <p>We believe photography is not just about images — it's about preserving moments that matter. From the
+              quiet glance between two people to the grandeur of a celebration, we see the magic in every instant.</p>
+            <p>Based in Kolkata, we travel across India and the world for couples, creators, and brands who value the
+              art of the image.</p>
+            <span class="about-sign">arc_xtudios</span>
+          </div>
+          <div class="about-pillars">
+            <div class="pillar"><span class="pill-t">Vision</span>
+              <div class="pill-h">Cinematic Storytelling</div>
+              <p class="pill-p">Every session is approached like a film — composed, lit, and directed with intent.</p>
+            </div>
+            <div class="pillar"><span class="pill-t">Approach</span>
+              <div class="pill-h">Emotion First</div>
+              <p class="pill-p">We chase feelings over poses. Authenticity over perfection. Memory over aesthetics.</p>
+            </div>
+            <div class="pillar"><span class="pill-t">Style</span>
+              <div class="pill-h">Timeless Edit</div>
+              <p class="pill-p">Minimal retouching. Natural colour. Images that will look beautiful in 30 years.</p>
+            </div>
+            <div class="pillar"><span class="pill-t">Promise</span>
+              <div class="pill-h">Your Story, Beautifully</div>
+              <p class="pill-p">We return images that reflect exactly who you are — not who you think you should be.</p>
+            </div>
+          </div>
+        </div>
+        <div class="about-img-row">
+          <img src="Images/IMG-20260413-WA0013.jpg" alt="" loading="lazy">
+          <img src="Images/IMG-20260413-WA0026.jpg" alt="" loading="lazy">
+          <img src="Images/_DSC4733.jpeg" alt="" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PAGE · SERVICES ══ -->
+    <div class="pg" id="pg-services">
+      <div class="svc-hero">
+        <div class="svc-hero-bg"></div>
+        <div class="svc-hero-content">
+          <span class="sec-eyebrow">What We Offer</span>
+          <h2 class="svc-hero-h">Crafted for <em>Every</em> Moment</h2>
+        </div>
+      </div>
+      <div class="svc-body">
+        <div class="svc-intro">
+          <p>From intimate portraits to grand celebrations — we bring the same cinematic artistry to every session we
+            photograph.</p>
+        </div>
+        <div class="svc-list">
+          <div class="svc-row" onclick="go('contact')"><span class="svc-n">01</span>
+            <div class="svc-title">Wedding Photography</div>
+            <p class="svc-desc">Full-day cinematic coverage — from morning rituals to the final dance. Every emotion,
+              preserved forever.</p>
+            <div class="svc-arrow">→</div>
+          </div>
+          <div class="svc-row" onclick="go('contact')"><span class="svc-n">02</span>
+            <div class="svc-title">Pre-Wedding Shoots</div>
+            <p class="svc-desc">Intimate, editorial sessions that tell your love story. Locations curated for visual
+              excellence.</p>
+            <div class="svc-arrow">→</div>
+          </div>
+          <div class="svc-row" onclick="go('contact')"><span class="svc-n">03</span>
+            <div class="svc-title">Portrait Photography</div>
+            <p class="svc-desc">Personal branding, individual and couple portraits crafted to reveal authentic identity.
+            </p>
+            <div class="svc-arrow">→</div>
+          </div>
+          <div class="svc-row" onclick="go('contact')"><span class="svc-n">04</span>
+            <div class="svc-title">Event Coverage</div>
+            <p class="svc-desc">Corporate events, celebrations, and ceremonies — documented with artistic precision.</p>
+            <div class="svc-arrow">→</div>
+          </div>
+          <div class="svc-row" onclick="go('contact')"><span class="svc-n">05</span>
+            <div class="svc-title">Creative &amp; Fashion Shoots</div>
+            <p class="svc-desc">Conceptual and editorial shoots for models, creators, and brands demanding visual
+              excellence.</p>
+            <div class="svc-arrow">→</div>
+          </div>
+        </div>
+        <div class="svc-cta-band">
+          <p class="svc-cta-q">"Your moments deserve to be remembered <span>beautifully.</span>"</p>
+          <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+            <button class="btn-hero-fill" onclick="go('contact')">Book a Session</button>
+            <a href="https://wa.me/919800000000" target="_blank" class="btn-hero-ghost"
+              style="border-color:rgba(26,22,18,.3);color:var(--cream);">WhatsApp Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PAGE · STORIES ══ -->
+    <div class="pg" id="pg-stories">
+      <div class="stories-hero">
+        <div class="stories-hero-bg"></div>
+        <div class="stories-hero-content">
+          <span class="sec-eyebrow">Client Stories</span>
+          <h2 class="stories-hero-h">"They didn't just photograph our wedding —<br>they preserved our love."</h2>
+        </div>
+      </div>
+      <div class="stories-body">
+        <div class="testi-featured">
+          <div class="tfeat">
+            <div class="tfeat-stars">★★★★★</div>
+            <p class="tfeat-text">"Captured our wedding perfectly — every moment felt alive. We cried looking at the
+              photos. arc_xtudios understood our vision better than we did ourselves."</p>
+            <div class="tfeat-author">
+              <img class="tfeat-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80"
+                alt="">
+              <div><span class="tfeat-name">Rahul &amp; Priya Mehta</span><span class="tfeat-role">Wedding ·
+                  Kolkata</span></div>
+            </div>
+          </div>
+          <div class="tfeat">
+            <div class="tfeat-stars">★★★★★</div>
+            <p class="tfeat-text">"Our pre-wedding shoot looked straight out of a film. Every single frame was a
+              masterpiece. We immediately booked them for the wedding too."</p>
+            <div class="tfeat-author">
+              <img class="tfeat-avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&q=80"
+                alt="">
+              <div><span class="tfeat-name">Arjun &amp; Meera Kapoor</span><span class="tfeat-role">Pre-Wedding ·
+                  Udaipur</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-secondary">
+          <div class="tsec">
+            <div class="tsec-stars">★★★★★</div>
+            <p class="tsec-text">"Incredible creativity and professionalism. My portrait session was the most
+              comfortable and natural I've ever experienced."</p>
+            <div class="tsec-author"><img class="tsec-avatar"
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&q=80" alt="">
+              <div><span class="tsec-name">Anika Singh</span><span class="tsec-role">Portrait Client</span></div>
+            </div>
+          </div>
+          <div class="tsec">
+            <div class="tsec-stars">★★★★★</div>
+            <p class="tsec-text">"My fashion portfolio transformed completely. The creative direction and editing were
+              at a professional agency level. Highly recommend."</p>
+            <div class="tsec-author"><img class="tsec-avatar"
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&q=80" alt="">
+              <div><span class="tsec-name">Zara Tariq</span><span class="tsec-role">Model &amp; Creator</span></div>
+            </div>
+          </div>
+          <div class="tsec">
+            <div class="tsec-stars">★★★★★</div>
+            <p class="tsec-text">"They covered our corporate event and the photos were so exceptional our CEO put them
+              on the company website immediately."</p>
+            <div class="tsec-author"><img class="tsec-avatar"
+                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80" alt="">
+              <div><span class="tsec-name">Vikram Patel</span><span class="tsec-role">Corporate Client</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="why-section">
+          <div class="sec-header" style="margin-bottom:32px;">
+            <div><span class="sec-eyebrow">Why arc_xtudios</span>
+              <h2 class="sec-h">Beyond the <em>Ordinary</em></h2>
+            </div>
+          </div>
+          <div class="why-row">
+            <div class="why-col"><span class="why-col-n">I</span>
+              <div class="why-col-h">Cinematic Eye</div>
+              <p class="why-col-p">Each frame composed like a film still — light and emotion aligned.</p>
+            </div>
+            <div class="why-col"><span class="why-col-n">II</span>
+              <div class="why-col-h">Attention to Detail</div>
+              <p class="why-col-p">We notice what others miss — the quiet beauty in every chaos.</p>
+            </div>
+            <div class="why-col"><span class="why-col-n">III</span>
+              <div class="why-col-h">Personalized Sessions</div>
+              <p class="why-col-p">Every shoot is designed around your story, energy and vision.</p>
+            </div>
+            <div class="why-col"><span class="why-col-n">IV</span>
+              <div class="why-col-h">Creative Direction</div>
+              <p class="why-col-p">We guide you to feel confident and radiant throughout.</p>
+            </div>
+            <div class="why-col"><span class="why-col-n">V</span>
+              <div class="why-col-h">Premium Editing</div>
+              <p class="why-col-p">Timeless, natural retouching. Images that age beautifully.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PAGE · CONTACT ══ -->
+    <div class="pg" id="pg-contact">
+      <div class="contact-split">
+        <div class="contact-left-panel">
+          <div class="contact-left-inner">
+            <span class="sec-eyebrow">Get in Touch</span>
+            <h2 class="contact-h">Let's Create Something<br><span>Beautiful</span></h2>
+            <div class="cinfo">
+              <div class="cinfo-dot"></div>
+              <div>
+                <div class="cinfo-lbl">Location</div>
+                <div class="cinfo-val">Kolkata, West Bengal, India</div>
+              </div>
+            </div>
+            <div class="cinfo">
+              <div class="cinfo-dot"></div>
+              <div>
+                <div class="cinfo-lbl">Call / WhatsApp</div>
+                <div class="cinfo-val">+91 98XXX XXXXX</div>
+              </div>
+            </div>
+            <div class="cinfo">
+              <div class="cinfo-dot"></div>
+              <div>
+                <div class="cinfo-lbl">Email</div>
+                <div class="cinfo-val">hello@arcxtudios.com</div>
+              </div>
+            </div>
+            <div class="cinfo">
+              <div class="cinfo-dot"></div>
+              <div>
+                <div class="cinfo-lbl">Response Time</div>
+                <div class="cinfo-val">Within 24 hours</div>
+              </div>
+            </div>
+            <div class="contact-social">
+              <a href="#" class="csoc">📷</a>
+              <a href="#" class="csoc">▶</a>
+              <a href="#" class="csoc">🐦</a>
+              <a href="#" class="csoc">💼</a>
+            </div>
+            <div class="contact-foot">© 2025 arc_xtudios · All rights reserved<br>Framing Stories. Capturing Moments.
+            </div>
+          </div>
+        </div>
+        <div class="contact-right-panel">
+          <div class="form-title">Tell us about your shoot</div>
+          <div class="f-row">
+            <div class="f-group"><label class="f-label">Full Name</label><input class="f-input" type="text"
+                placeholder="Your name"></div>
+            <div class="f-group"><label class="f-label">Phone</label><input class="f-input" type="tel"
+                placeholder="+91 XXXXX XXXXX"></div>
+          </div>
+          <div class="f-group"><label class="f-label">Email</label><input class="f-input" type="email"
+              placeholder="your@email.com"></div>
+          <div class="f-group"><label class="f-label">Type of Shoot</label><select class="f-select">
+              <option value="" disabled selected>Select a service</option>
+              <option>Wedding Photography</option>
+              <option>Pre-Wedding Shoot</option>
+              <option>Portrait Photography</option>
+              <option>Event Coverage</option>
+              <option>Creative / Fashion Shoot</option>
+            </select></div>
+          <div class="f-group"><label class="f-label">Preferred Date</label><input class="f-input" type="date"></div>
+          <div class="f-group"><label class="f-label">Your Vision</label><textarea class="f-ta"
+              placeholder="Tell us about your shoot — location, mood, ideas..."></textarea></div>
+          <div class="f-actions">
+            <button class="btn-submit" onclick="handleForm(event)">Send Enquiry</button>
+            <a href="https://wa.me/919800000000" target="_blank" class="btn-wa-sm">💬 WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /stage -->
+
+  <!-- LIGHTBOX -->
+  <div id="lb">
+    <span id="lb-x" onclick="closeLb()">✕</span>
+    <img id="lbimg" src="" alt="">
+  </div>
+
+  <!-- FLOAT WA -->
+  <a href="https://wa.me/919800000000" target="_blank" id="fwa">💬</a>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.toggleMenu = function () {
         const menu = document.getElementById('mobMenu');
         const ham = document.getElementById('ham');
-      
+
         menu.classList.toggle('open');
         ham.classList.toggle('active');
     }
@@ -63,20 +63,40 @@ document.addEventListener("DOMContentLoaded", () => {
     /* COUNTERS */
     function runCounters() {
         document.querySelectorAll('.strip-n').forEach(el => {
-            const t = +el.dataset.t;
-            let c = 0;
-            const s = t / 55;
+            const target = +el.dataset.t;
+            let count = 0;
 
-            const id = setInterval(() => {
-                c += s;
-                if (c >= t) {
-                    el.textContent = t + (t >= 98 ? '%' : '+');
-                    clearInterval(id);
+            const duration = 4000; // ⏳ total time (2 seconds)
+            const increment = target / (duration / 16); // smooth frame-based
+
+            function update() {
+                count += increment;
+
+                if (count >= target) {
+                    el.textContent = target + (target >= 98 ? '%' : '+');
                 } else {
-                    el.textContent = Math.floor(c) + (t >= 98 ? '%' : '+');
+                    el.textContent = Math.floor(count) + (target >= 98 ? '%' : '+');
+                    requestAnimationFrame(update);
                 }
-            }, 20);
+            }
+
+            update();
         });
+    }
+
+    function update(progress = 0) {
+        progress += 0.02;
+
+        const ease = 1 - Math.pow(1 - progress, 3); // ease-out
+        const value = Math.floor(target * ease);
+
+        el.textContent = value + (target >= 98 ? '%' : '+');
+
+        if (progress < 1) {
+            requestAnimationFrame(() => update(progress));
+        } else {
+            el.textContent = target + (target >= 98 ? '%' : '+');
+        }
     }
 
     setTimeout(runCounters, 500);
@@ -129,34 +149,34 @@ document.addEventListener("DOMContentLoaded", () => {
             b.style.background = '';
         }, 3000);
     }
-    
-/* ===== REVIEW SLIDER ===== */
 
-const reviewSlides = document.querySelectorAll('.review-slide');
-const reviewDots = document.querySelectorAll('.rdot');
+    /* ===== REVIEW SLIDER ===== */
 
-let reviewIndex = 0;
+    const reviewSlides = document.querySelectorAll('.review-slide');
+    const reviewDots = document.querySelectorAll('.rdot');
 
-function showReview(n) {
-    reviewSlides[reviewIndex].classList.remove('active');
-    reviewDots[reviewIndex].classList.remove('active');
-  
-    reviewIndex = n;
-  
-    requestAnimationFrame(() => {
-      reviewSlides[reviewIndex].classList.add('active');
-      reviewDots[reviewIndex].classList.add('active');
-    });
-}
+    let reviewIndex = 0;
 
-// manual click
-window.goReview = function(n) {
-  showReview(n);
-}
+    function showReview(n) {
+        reviewSlides[reviewIndex].classList.remove('active');
+        reviewDots[reviewIndex].classList.remove('active');
 
-// auto slide
-setInterval(() => {
-    showReview((reviewIndex + 1) % reviewSlides.length);
-  }, 5000); // slower = smoother feel
+        reviewIndex = n;
+
+        requestAnimationFrame(() => {
+            reviewSlides[reviewIndex].classList.add('active');
+            reviewDots[reviewIndex].classList.add('active');
+        });
+    }
+
+    // manual click
+    window.goReview = function (n) {
+        showReview(n);
+    }
+
+    // auto slide
+    setInterval(() => {
+        showReview((reviewIndex + 1) % reviewSlides.length);
+    }, 5000); // slower = smoother feel
 
 });

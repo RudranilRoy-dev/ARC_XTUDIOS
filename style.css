@@ -68,7 +68,8 @@ body {
   color: var(--tx-body);
   font-family: 'Jost', sans-serif;
   font-weight: 300;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   height: 100svh;
   cursor: default;
 }
@@ -110,7 +111,9 @@ button,
   background: rgba(19, 0, 0, 0.92);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--line);
-  transition: padding .4s var(--ease), background .4s;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.4s ease;
+  will-change: transform;
 }
 
 .nav-brand {
@@ -121,6 +124,18 @@ button,
   color: var(--tx-head);
   text-decoration: none;
   cursor: pointer;
+}
+
+#nav.hide {
+  transform: translateY(-110%);
+  opacity: 0;
+}
+
+#nav.show {
+  transform: translateY(0);
+  opacity: 1;
+  backdrop-filter: blur(14px);
+  background: rgba(19, 0, 0, 0.6);
 }
 
 .nav-brand span {
@@ -1299,8 +1314,10 @@ button,
 }
 
 .insta-link {
-  font-style: italic; /* keeps same feel as <em> */
-  color: var(--gold2); /* or #c9a96e if not using variables */
+  font-style: italic;
+  /* keeps same feel as <em> */
+  color: var(--gold2);
+  /* or #c9a96e if not using variables */
   text-decoration: none;
   position: relative;
   transition: all 0.3s ease;
@@ -2782,9 +2799,11 @@ button,
 .mob-menu {
   position: fixed;
   inset: 0;
-  z-index: 190;
+  z-index: 1000;
+  /* must beat nav z-index:999 */
   height: 100svh;
-  background: var(--bg-raise);
+  background: #170000;
+  /* deep opaque maroon */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2792,8 +2811,7 @@ button,
   gap: 36px;
   opacity: 0;
   pointer-events: none;
-  transition: opacity .45s var(--ease);
-  border-right: 1px solid var(--line);
+  transition: opacity .4s var(--ease);
 }
 
 .mob-menu.open {
@@ -3126,6 +3144,9 @@ button,
   width: 100%;
   height: 100%;
 
+  display: flex;
+  /* was missing — caused misaligned content */
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -3173,3 +3194,156 @@ button,
   color: #D4AF6E;
 }
 
+/* ══════════════════════════════════════════════════
+   MOBILE / TABLET — NAV VISIBILITY FIXES
+══════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+
+  /* ── Nav bar: always fully opaque so it's visible
+        over both dark hero and light page sections ── */
+  #nav {
+    background: #190202 !important;
+    /* solid, not semi-transparent */
+    backdrop-filter: none;
+    border-bottom: 1px solid rgba(201, 169, 110, 0.28);
+    padding: 12px 24px;
+  }
+
+  /* ── Hamburger: gold colour, thicker lines, bigger tap area ── */
+  .hamburger {
+    display: flex;
+    padding: 8px;
+    /* larger touch target */
+    margin-right: -8px;
+    /* compensate padding */
+    gap: 7px;
+    z-index: 1001;
+    /* above mob-menu so still tappable */
+  }
+
+  .hamburger span {
+    width: 26px;
+    height: 2px;
+    /* thicker — was 1px */
+    background: var(--gold);
+    /* gold stands out on dark nav */
+    border-radius: 1px;
+    display: block;
+    transition: transform .3s ease, opacity .25s ease, width .3s ease;
+    transform-origin: center;
+  }
+
+  /* Animated → X when open */
+  .hamburger.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+    width: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  /* ── Mobile menu: stronger gold top border, bigger close btn ── */
+  .mob-menu::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .mob-menu a {
+    font-size: 2.2rem;
+    letter-spacing: .04em;
+  }
+
+  /* Gold underline on hover */
+  .mob-menu a:hover {
+    color: var(--gold-bright);
+  }
+
+  #mob-close {
+    cursor: pointer;
+    font-size: 1.8rem;
+    top: 20px;
+    right: 28px;
+    color: var(--tx-muted);
+    transition: color .2s;
+    z-index: 1002;
+  }
+
+  #mob-close:hover {
+    color: var(--gold);
+  }
+
+  /* ── Logo-circle always has visible border on mobile ── */
+  .logo-circle {
+    border: 1px solid rgba(201, 169, 110, 0.35) !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+  }
+}
+
+/* ── Landscape orientation (tablets, phones rotated) ── */
+@media (max-height: 500px) and (orientation: landscape) {
+
+  /* Compact nav */
+  #nav {
+    padding: 7px 20px !important;
+  }
+
+  .logo-circle {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .brand-name {
+    font-size: 0.95rem;
+  }
+
+  /* Mobile menu: scrollable + tighter layout in landscape */
+  .mob-menu {
+    overflow-y: auto;
+    justify-content: flex-start;
+    padding-top: 64px;
+    padding-bottom: 24px;
+    gap: 20px;
+  }
+
+  .mob-menu a {
+    font-size: 1.6rem;
+  }
+
+  #mob-close {
+    top: 12px;
+    right: 20px;
+  }
+
+  /* Hero: use svh in landscape too */
+  .home-hero {
+    height: 100svh;
+  }
+}
+
+/* ══════════════════════════════════════════════════
+   INSTA LINK — style inline anchor
+══════════════════════════════════════════════════ */
+.insta-link {
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201, 169, 110, 0.4);
+  padding-bottom: 1px;
+  transition: color .3s, border-color .3s;
+  font-style: italic;
+}
+
+.insta-link:hover {
+  color: var(--gold-bright);
+  border-color: var(--gold-bright);
+}

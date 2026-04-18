@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let progress = 0;
 
             function tick() {
-                progress += 0.018;
+                progress += 0.002;
                 const ease = 1 - Math.pow(1 - Math.min(progress, 1), 3);
                 const value = Math.round(target * ease);
 

@@ -59,6 +59,14 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById('mobMenu').classList.remove('open');
     }
 
+    window.addEventListener("orientationchange", () => {
+        setTimeout(() => {
+          document.body.style.display = "none";
+          document.body.offsetHeight; // force reflow
+          document.body.style.display = "";
+        }, 100);
+    });
+
 
     /* COUNTERS */
     function runCounters() {
@@ -66,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const target = +el.dataset.t;
             let count = 0;
 
-            const duration = 10000; // ⏳ total time (2 seconds)
+            const duration = 4000; // ⏳ total time (2 seconds)
             const increment = target / (duration / 16); // smooth frame-based
 
             function update() {

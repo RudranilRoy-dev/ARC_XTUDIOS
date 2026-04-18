@@ -1,36 +1,40 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* HERO SLIDESHOW */
+    /* ═══════════════════════════════
+       HERO SLIDESHOW
+    ═══════════════════════════════ */
     let slide = 0;
     const imgs = document.querySelectorAll('.hero-img');
     const dots = document.querySelectorAll('.hdot');
 
-    function setSlide(n) {
+    window.setSlide = function (n) {
         imgs[slide].classList.remove('show');
         dots[slide].classList.remove('on');
         slide = n;
         imgs[slide].classList.add('show');
         dots[slide].classList.add('on');
+    };
+
+    if (imgs.length > 0) {
+        setInterval(() => {
+            setSlide((slide + 1) % imgs.length);
+        }, 5000);
     }
 
-    setInterval(() => {
-        if (imgs.length > 0) {
-            setSlide((slide + 1) % imgs.length);
-        }
-    }, 5000);
-
-
-    /* NAVIGATION */
+    /* ═══════════════════════════════
+       NAVIGATION
+    ═══════════════════════════════ */
     let cur = 'home';
 
     window.go = function (page) {
         if (page === cur) return;
 
         const prev = document.getElementById('pg-' + cur);
-        prev.classList.remove('active');
+        if (prev) prev.classList.remove('active');
 
         setTimeout(() => {
             const next = document.getElementById('pg-' + page);
+            if (!next) return;
             next.classList.add('active');
             next.scrollTop = 0;
         }, 200);
@@ -39,78 +43,62 @@ document.addEventListener("DOMContentLoaded", () => {
             a.classList.toggle('active', a.dataset.p === page);
         });
 
-        const nav = document.getElementById('nav');
-        nav.classList.toggle('light', page !== 'home');
+        /* Nav appearance: transparent only on home */
+        document.getElementById('nav').classList.toggle('on-dark', page === 'home');
 
         cur = page;
-    }
+    };
 
+    /* Set initial state */
+    document.getElementById('nav').classList.add('on-dark');
+
+    /* ═══════════════════════════════
+       MOBILE MENU TOGGLE
+    ═══════════════════════════════ */
     window.toggleMenu = function () {
         const menu = document.getElementById('mobMenu');
         const ham = document.getElementById('ham');
-
         menu.classList.toggle('open');
         ham.classList.toggle('active');
-    }
+    };
 
-
-    /* MOBILE MENU */
     window.closeMob = function () {
         document.getElementById('mobMenu').classList.remove('open');
-    }
+        document.getElementById('ham').classList.remove('active');
+    };
 
-    window.addEventListener("orientationchange", () => {
-        setTimeout(() => {
-          document.body.style.display = "none";
-          document.body.offsetHeight; // force reflow
-          document.body.style.display = "";
-        }, 100);
+    /* Close mobile menu on orientation change */
+    window.addEventListener('orientationchange', () => {
+        setTimeout(closeMob, 300);
     });
 
-
-    /* COUNTERS */
+    /* ═══════════════════════════════
+       STAT COUNTERS
+    ═══════════════════════════════ */
     function runCounters() {
         document.querySelectorAll('.strip-n').forEach(el => {
             const target = +el.dataset.t;
-            let count = 0;
+            let progress = 0;
 
-            const duration = 4000; // ⏳ total time (2 seconds)
-            const increment = target / (duration / 16); // smooth frame-based
+            function tick() {
+                progress += 0.018;
+                const ease = 1 - Math.pow(1 - Math.min(progress, 1), 3);
+                const value = Math.round(target * ease);
 
-            function update() {
-                count += increment;
+                el.textContent = value + (target >= 98 ? '%' : '+');
 
-                if (count >= target) {
-                    el.textContent = target + (target >= 98 ? '%' : '+');
-                } else {
-                    el.textContent = Math.floor(count) + (target >= 98 ? '%' : '+');
-                    requestAnimationFrame(update);
-                }
+                if (progress < 1) requestAnimationFrame(tick);
             }
 
-            update();
+            requestAnimationFrame(tick);
         });
-    }
-
-    function update(progress = 0) {
-        progress += 0.02;
-
-        const ease = 1 - Math.pow(1 - progress, 3); // ease-out
-        const value = Math.floor(target * ease);
-
-        el.textContent = value + (target >= 98 ? '%' : '+');
-
-        if (progress < 1) {
-            requestAnimationFrame(() => update(progress));
-        } else {
-            el.textContent = target + (target >= 98 ? '%' : '+');
-        }
     }
 
     setTimeout(runCounters, 500);
 
-
-    /* PORTFOLIO FILTER */
+    /* ═══════════════════════════════
+       PORTFOLIO FILTER
+    ═══════════════════════════════ */
     document.querySelectorAll('.cat-btn').forEach(btn => {
         btn.addEventListener('click', function () {
             document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('on'));
@@ -121,21 +109,25 @@ document.addEventListener("DOMContentLoaded", () => {
             document.querySelectorAll('.gcell').forEach(c => {
                 const show = f === 'all' || c.dataset.c === f;
                 c.style.opacity = show ? '1' : '0.15';
+                c.style.transition = 'opacity 0.35s';
             });
         });
     });
 
-
-    /* LIGHTBOX */
+    /* ═══════════════════════════════
+       LIGHTBOX
+    ═══════════════════════════════ */
     window.openLb = function (el) {
-        document.getElementById('lbimg').src =
-            el.querySelector('img').src.replace('w=700', 'w=1400');
+        const src = el.querySelector('img').src;
+        document.getElementById('lbimg').src = src;
         document.getElementById('lb').classList.add('open');
-    }
+        document.body.style.overflow = 'hidden';
+    };
 
     window.closeLb = function () {
         document.getElementById('lb').classList.remove('open');
-    }
+        document.body.style.overflow = '';
+    };
 
     document.getElementById('lb').addEventListener('click', e => {
         if (e.target === document.getElementById('lb')) closeLb();
@@ -145,46 +137,46 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.key === 'Escape') closeLb();
     });
 
-
-    /* FORM */
+    /* ═══════════════════════════════
+       CONTACT FORM
+    ═══════════════════════════════ */
     window.handleForm = function (e) {
-        const b = e.currentTarget;
-        b.textContent = 'Sent ✓';
-        b.style.background = '#2d7a3a';
+        const btn = e.currentTarget;
+        const orig = btn.textContent;
+        btn.textContent = 'Sent ✓';
+        btn.style.background = '#2d7a3a';
+        btn.disabled = true;
 
         setTimeout(() => {
-            b.textContent = 'Send Enquiry';
-            b.style.background = '';
+            btn.textContent = orig;
+            btn.style.background = '';
+            btn.disabled = false;
         }, 3000);
-    }
+    };
 
-    /* ===== REVIEW SLIDER ===== */
-
+    /* ═══════════════════════════════
+       REVIEW SLIDER
+    ═══════════════════════════════ */
     const reviewSlides = document.querySelectorAll('.review-slide');
     const reviewDots = document.querySelectorAll('.rdot');
-
     let reviewIndex = 0;
 
     function showReview(n) {
+        if (!reviewSlides.length) return;
+
         reviewSlides[reviewIndex].classList.remove('active');
-        reviewDots[reviewIndex].classList.remove('active');
+        if (reviewDots[reviewIndex]) reviewDots[reviewIndex].classList.remove('active');
 
-        reviewIndex = n;
+        reviewIndex = (n + reviewSlides.length) % reviewSlides.length;
 
-        requestAnimationFrame(() => {
-            reviewSlides[reviewIndex].classList.add('active');
-            reviewDots[reviewIndex].classList.add('active');
-        });
+        reviewSlides[reviewIndex].classList.add('active');
+        if (reviewDots[reviewIndex]) reviewDots[reviewIndex].classList.add('active');
     }
 
-    // manual click
-    window.goReview = function (n) {
-        showReview(n);
-    }
+    window.goReview = function (n) { showReview(n); };
 
-    // auto slide
-    setInterval(() => {
-        showReview((reviewIndex + 1) % reviewSlides.length);
-    }, 5000); // slower = smoother feel
+    if (reviewSlides.length > 1) {
+        setInterval(() => showReview(reviewIndex + 1), 5000);
+    }
 
 });

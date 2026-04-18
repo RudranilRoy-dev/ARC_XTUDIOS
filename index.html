@@ -42,7 +42,7 @@
       <li><a href="#" data-p="stories" onclick="go('stories');return false;">Stories</a></li>
     </ul>
     <a href="#" class="nav-cta" onclick="go('contact');return false;">Book a Shoot</a>
-    <div class="hamburger" id="ham" onclick="document.getElementById('ham').addEventListener('click', toggleMenu);">
+    <div class="hamburger" id="ham" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </div>
   </nav>
@@ -274,14 +274,14 @@
             </p>
             <div class="review-author">Rahul & Priya Mehta</div>
           </div>
-        
+
           <div class="review-slide">
             <p class="review-text">
               Every frame felt like a movie scene. The emotions, the light — everything was perfect.
             </p>
             <div class="review-author">Arjun & Meera Kapoor</div>
           </div>
-        
+
           <div class="review-slide">
             <p class="review-text">
               We didn’t just get photos, we got memories we’ll cherish forever.
@@ -293,7 +293,7 @@
             <div class="rdot" onclick="goReview(1)"></div>
             <div class="rdot" onclick="goReview(2)"></div>
           </div>
-        
+
         </div>
       </section>
 
@@ -354,7 +354,7 @@
         <div class="insta-label">
           <span class="sec-eyebrow">Instagram</span>
           <h3 class="insta-h">
-            Follow 
+            Follow
             <a href="https://instagram.com/arc_xtudios" target="_blank" class="insta-link">
               @arc_xtudios ↗
             </a>
@@ -404,7 +404,7 @@
               <span class="footer-brand-name">ARC<span>_XTUDIOS</span></span>
             </div>
             <p class="footer-tagline">Framing Stories.<br>Capturing Moments.</p>
-            <p class="footer-about-text">A creative photography studio based in Shantiniketan, India — specialising in
+            <p class="footer-about-text">A creative photography studio based in Kolkata, India — specialising in
               weddings, portraits and cinematic storytelling since 2024.</p>
             <div class="footer-socials">
               <a href="#" class="fsoc" title="Instagram">
@@ -596,7 +596,8 @@
         <div class="about-grid">
           <div class="about-copy">
             <p>arc_xtudios is built on a passion for storytelling through visuals. Every frame is crafted to capture
-              <strong>emotion, detail, and authenticity.</strong></p>
+              <strong>emotion, detail, and authenticity.</strong>
+            </p>
             <p>We believe photography is not just about images — it's about preserving moments that matter. From the
               quiet glance between two people to the grandeur of a celebration, we see the magic in every instant.</p>
             <p>Based in Kolkata, we travel across India and the world for couples, creators, and brands who value the
@@ -679,8 +680,7 @@
           <p class="svc-cta-q">"Your moments deserve to be remembered <span>beautifully.</span>"</p>
           <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
             <button class="btn-hero-fill" onclick="go('contact')">Book a Session</button>
-            <a href="https://wa.me/919800000000" target="_blank" class="btn-hero-ghost"
-              style="border-color:rgba(26,22,18,.3);color:var(--cream);">WhatsApp Us</a>
+            <a href="https://wa.me/919800000000" target="_blank" class="btn-hero-ghost">WhatsApp Us</a>
           </div>
         </div>
       </div>
@@ -866,7 +866,7 @@
   <!-- FLOAT WA -->
   <a href="https://wa.me/919800000000" target="_blank" id="fwa">💬</a>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 
 </html>

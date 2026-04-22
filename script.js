@@ -1,6 +1,37 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     /* ═══════════════════════════════
+       AUTO GALLERY FROM JSON (NEW)
+    ═══════════════════════════════ */
+    async function loadGalleryFromJSON() {
+        const res = await fetch("images.json");
+        const images = await res.json();
+
+        const gallery = document.querySelector(".gallery");
+        gallery.innerHTML = "";
+
+        images.forEach(img => {
+            const div = document.createElement("div");
+            div.className = "gcell";
+            div.setAttribute("data-c", img.category);
+
+            div.innerHTML = `
+                <img src="Images/${img.src}" loading="lazy">
+            `;
+
+            div.onclick = () => openLb(div);
+
+            gallery.appendChild(div);
+        });
+    }
+
+    loadGalleryFromJSON();
+
+    function getGalleryItems() {
+        return Array.from(document.querySelectorAll('.gcell'));
+    }
+
+    /* ═══════════════════════════════
        HERO SLIDESHOW
     ═══════════════════════════════ */
     let slide = 0;
@@ -29,7 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
     window.go = function (page) {
         if (page === cur) return;
 
-        // close lightbox if open before page switch
         closeLb();
 
         const prev = document.getElementById('pg-' + cur);
@@ -54,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('nav').classList.add('on-dark');
 
     /* ═══════════════════════════════
-       MOBILE MENU TOGGLE
+       MOBILE MENU
     ═══════════════════════════════ */
     window.toggleMenu = function () {
         const menu = document.getElementById('mobMenu');
@@ -97,15 +127,14 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(runCounters, 500);
 
     /* ═══════════════════════════════
-       PORTFOLIO FILTER + LIGHTBOX GALLERY
+       PORTFOLIO FILTER + LIGHTBOX
     ═══════════════════════════════ */
-    const galleryItems = Array.from(document.querySelectorAll('.gcell'));
     let activeFilter = 'all';
-    let visibleGalleryItems = [...galleryItems];
+    let visibleGalleryItems = [];
     let currentGalleryIndex = 0;
 
     function updateVisibleGalleryItems() {
-        visibleGalleryItems = galleryItems.filter(item => {
+        visibleGalleryItems = getGalleryItems().filter(item => {
             return activeFilter === 'all' || item.dataset.c === activeFilter;
         });
     }
@@ -117,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             activeFilter = this.dataset.f;
 
-            galleryItems.forEach(item => {
+            getGalleryItems().forEach(item => {
                 const show = activeFilter === 'all' || item.dataset.c === activeFilter;
                 item.classList.toggle('hide', !show);
             });

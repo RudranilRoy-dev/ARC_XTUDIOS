@@ -323,7 +323,7 @@ button,
   background-size: cover;
   background-position: center;
   opacity: 0;
-  filter: brightness(1.2)saturate(.8);
+  filter: brightness(1.2)saturate(1);
   transition: opacity 1.2s var(--ease);
 }
 
@@ -645,7 +645,7 @@ button,
   object-fit: cover;
   display: block;
   transition: transform .9s var(--ease), filter .6s;
-  filter: brightness(.8), saturate(.8);
+  filter: brightness(1), saturate(1);
 }
 
 .feat-cell:nth-child(1) img {
@@ -659,7 +659,7 @@ button,
 
 .feat-cell:hover img {
   transform: scale(1.05);
-  filter: brightness(.8), saturate(.8);
+  filter: brightness(1), saturate(1);
 }
 
 .feat-label {
@@ -781,7 +781,7 @@ button,
   aspect-ratio: 4/5;
   object-fit: cover;
   display: block;
-  filter: brightness(.8), saturate(.8);
+  filter: brightness(1), saturate(1);
 }
 
 .editorial-img-caption {
@@ -868,13 +868,13 @@ button,
   aspect-ratio: 4/3;
   object-fit: cover;
   display: block;
-  filter: brightness(.8) saturate(.8);
+  filter: brightness(1) saturate(1);
   transition: transform .7s, filter .5s;
 }
 
 .hsp-card:hover .hsp-card-img img {
   transform: scale(1.05);
-  filter: brightness(.8) saturate(.8);
+  filter: brightness(1) saturate(1);
 }
 
 .hsp-card-body {
@@ -1156,7 +1156,7 @@ button,
   display: block;
   object-fit: cover;
   transition: transform .7s, filter .5s;
-  filter: brightness(.8) saturate(.8);
+  filter: brightness(1) saturate(1);
 }
 
 .news-card-hero .nc-img img {
@@ -1169,7 +1169,7 @@ button,
 
 .news-card:hover .nc-img img {
   transform: scale(1.05);
-  filter: brightness(.8) saturate(.8);
+  filter: brightness(1) saturate(1);
 }
 
 .nc-tag {
@@ -1289,12 +1289,12 @@ button,
   object-fit: cover;
   display: block;
   transition: transform .6s, filter .5s;
-  filter: brightness(.8) saturate(.8);
+  filter: brightness(1) saturate(1);
 }
 
 .insta-cell:hover img {
   transform: scale(1.1);
-  filter: brightness(.8) saturate(.8);
+  filter: brightness(1) saturate(1);
 }
 
 .insta-hover {
@@ -1696,7 +1696,7 @@ button,
   position: absolute;
   inset: 0;
   background: url("Images/DSCF1699.JPG") center/cover;
-  filter: brightness(.4) saturate(.8);
+  filter: brightness(.4) saturate(1);
 }
 
 .port-hero-text {
@@ -1775,7 +1775,7 @@ button,
   display: block;
   border-radius: 6px;
   transition: transform .8s var(--ease), filter .5s;
-  filter: brightness(.8) saturate(.8);
+  filter: brightness(1) saturate(1);
 }
 
 .gcell:hover img {
@@ -1870,8 +1870,8 @@ button,
 }
 
 .about-hero-img {
-  background: url('Images/_DSC5023.jpeg') center/cover;
-  filter: brightness(.8) saturate(.8);
+  background: url('Images/1776934517594.jpg.jpeg') center/cover;
+  filter: brightness(1) saturate(1);
 }
 
 .about-hero-text {
@@ -1997,12 +1997,12 @@ button,
   aspect-ratio: .85;
   object-fit: cover;
   display: block;
-  filter: brightness(.8) saturate(.8);
+  filter: brightness(1) saturate(1);
   transition: filter .5s;
 }
 
 .about-img-row img:hover {
-  filter: brightness(.8) saturate(.8);
+  filter: brightness(1) saturate(1);
 }
 
 /* ══════════════════════════════════════════════════
@@ -2026,7 +2026,7 @@ button,
   position: absolute;
   inset: 0;
   background: url('Images/IMG-20260413-WA0033.jpg') center/cover;
-  filter: brightness(.6) saturate(.8);
+  filter: brightness(.6) saturate(1);
 }
 
 .svc-hero-content {
@@ -2194,7 +2194,7 @@ button,
   position: absolute;
   inset: 0;
   background: url('Images/_DSC4749.jpeg') center/cover;
-  filter: brightness(.6) saturate(.8);
+  filter: brightness(.6) saturate(1);
 }
 
 .stories-hero-content {
@@ -2450,7 +2450,7 @@ button,
   inset: 0;
   background: url('Images/IMG-20260413-WA0026.jpg') center/cover;
   opacity: .06;
-  filter: brightness(1)saturate(.8);
+  filter: brightness(1)saturate(1);
 }
 
 .contact-left-panel::after {

@@ -406,7 +406,7 @@ button,
 }
 
 .hero-sub {
-  font-size: .82rem;
+  font-size: 18px;
   letter-spacing: .06em;
   line-height: 1.9;
   color: var(--tx-muted);
@@ -563,7 +563,7 @@ button,
 }
 
 .strip-l {
-  font-size: .6rem;
+  font-size: 14px;
   letter-spacing: .26em;
   text-transform: uppercase;
   color: var(--tx-muted);
@@ -585,7 +585,7 @@ button,
 }
 
 .sec-eyebrow {
-  font-size: .58rem;
+  font-size: .7rem;
   letter-spacing: .4em;
   text-transform: uppercase;
   color: var(--gold);
@@ -607,7 +607,7 @@ button,
 }
 
 .sec-link {
-  font-size: .65rem;
+  font-size: .7rem;
   letter-spacing: .2em;
   text-transform: uppercase;
   color: var(--tx-muted);
@@ -741,7 +741,7 @@ button,
 }
 
 .editorial-p {
-  font-size: .88rem;
+  font-size: .95rem;
   color: var(--tx-muted);
   line-height: 2;
   font-weight: 300;
@@ -894,7 +894,7 @@ button,
 }
 
 .hsp-card-desc {
-  font-size: .76rem;
+  font-size: .9rem;
   color: var(--tx-muted);
   line-height: 1.8;
   font-weight: 300;
@@ -1014,7 +1014,7 @@ button,
 }
 
 .pstep-text {
-  font-size: .8rem;
+  font-size: .9rem;
   color: var(--tx-muted);
   line-height: 1.85;
   font-weight: 300;
@@ -1218,7 +1218,7 @@ button,
 }
 
 .nc-excerpt {
-  font-size: .8rem;
+  font-size: .9rem;
   color: var(--tx-muted);
   line-height: 1.8;
   font-weight: 300;
@@ -1755,15 +1755,14 @@ button,
 
 .gallery {
   column-count: 3;
-  column-gap: 14px;
+  column-gap: 16px;
 }
-
 .gcell {
   position: relative;
   overflow: hidden;
   cursor: pointer;
   break-inside: avoid;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   display: block;
   width: 100%;
   border-radius: 0;
@@ -1774,6 +1773,7 @@ button,
   height: auto;
   object-fit: cover;
   display: block;
+  border-radius: 6px;
   transition: transform .8s var(--ease), filter .5s;
   filter: brightness(.8) saturate(.8);
 }
@@ -1870,7 +1870,7 @@ button,
 }
 
 .about-hero-img {
-  background: url('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=1000&q=80') center/cover;
+  background: url('Images/_DSC5023.jpeg') center/cover;
   filter: brightness(.8) saturate(.8);
 }
 
@@ -2064,7 +2064,7 @@ button,
 }
 
 .svc-intro p {
-  font-size: .86rem;
+  font-size: 20px;
   color: var(--tx-muted);
   line-height: 2;
   font-weight: 300;
@@ -2112,10 +2112,11 @@ button,
 }
 
 .svc-desc {
-  font-size: .8rem;
-  color: var(--tx-muted);
-  line-height: 1.85;
-  font-weight: 300;
+  font-size: 16px;
+  color: var(--tx-body);
+  line-height: 1.7;
+  letter-spacing: 0.3px;
+  opacity: 0.9;
 }
 
 .svc-arrow {
@@ -2665,6 +2666,32 @@ button,
   gap: 12px;
   flex-wrap: wrap;
   margin-top: 36px;
+}
+
+.f-error {
+  font-size: 12px;
+  color: #e74c3c;
+  margin-top: 4px;
+  display: block;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: all 0.2s ease;
+}
+
+.f-error.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.f-input.error,
+.f-select.error,
+.f-ta.error {
+  border-color: #e74c3c;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1) brightness(0.8);
+  opacity: 0.8;
 }
 
 .btn-submit {
@@ -3431,6 +3458,7 @@ button,
 }
 
 @media(max-width:768px) {
+
   #lb-prev,
   #lb-next {
     width: 42px;

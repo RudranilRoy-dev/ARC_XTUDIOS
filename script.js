@@ -128,26 +128,37 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ═══════════════════════════════
        STAT COUNTERS
     ═══════════════════════════════ */
-    function runCounters() {
+    setTimeout(() => {
+
         document.querySelectorAll('.strip-n').forEach(el => {
             const target = +el.dataset.t;
+            const format = el.dataset.format;
             let progress = 0;
-
+    
             function tick() {
                 progress += 0.002;
                 const ease = 1 - Math.pow(1 - Math.min(progress, 1), 3);
                 const value = Math.round(target * ease);
-
-                el.textContent = value + (target >= 98 ? '%' : '+');
-
+    
+                let display;
+    
+                if (format === "k") {
+                    display = Math.round(value / 1000) + "K+";
+                } else if (target >= 98) {
+                    display = value + "%";
+                } else {
+                    display = value + "+";
+                }
+    
+                el.textContent = display;
+    
                 if (progress < 1) requestAnimationFrame(tick);
             }
-
+    
             requestAnimationFrame(tick);
         });
-    }
-
-    setTimeout(runCounters, 500);
+    
+    }, 500);
 
     /* ═══════════════════════════════
        PORTFOLIO FILTER + LIGHTBOX
@@ -237,22 +248,24 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ═══════════════════════════════
        CONTACT FORM
     ═══════════════════════════════ */
+
     window.handleForm = function (e) {
         e.preventDefault();
-
+    
         const btn = e.currentTarget;
-
+    
         const nameInput = document.querySelector('input[placeholder="Your name"]');
         const phoneInput = document.querySelector('input[type="tel"]');
         const emailInput = document.querySelector('input[type="email"]');
         const typeInput = document.querySelector('.f-select');
         const dateInput = document.querySelector('input[type="date"]');
         const messageInput = document.querySelector('.f-ta');
-
+        const otherInput = document.getElementById("otherShootInput");
+    
         const inputs = [nameInput, phoneInput, emailInput, typeInput, dateInput, messageInput];
-
+    
         let firstInvalid = null;
-
+    
         // 🔄 Clear previous errors
         inputs.forEach(input => {
             input.classList.remove("error");
@@ -260,65 +273,101 @@ document.addEventListener("DOMContentLoaded", () => {
             error.textContent = "";
             error.classList.remove("show");
         });
-
+    
+        if (otherInput) {
+            const error = otherInput.parentElement.querySelector(".f-error");
+            otherInput.classList.remove("error");
+            error.textContent = "";
+            error.classList.remove("show");
+        }
+    
         // ❌ VALIDATION FUNCTION
         function showError(input, message) {
             const error = input.parentElement.querySelector(".f-error");
             input.classList.add("error");
             error.textContent = message;
             error.classList.add("show");
-
+    
             if (!firstInvalid) firstInvalid = input;
         }
-
+    
         const name = nameInput.value.trim();
         const phone = phoneInput.value.trim();
         const email = emailInput.value.trim();
         const type = typeInput.value;
         const date = dateInput.value;
         const message = messageInput.value.trim();
-
+    
+        // 🔍 BASIC VALIDATION
         if (!name) showError(nameInput, "Name is required");
+    
         if (!phone) showError(phoneInput, "Phone is required");
         else if (!/^[0-9]{10}$/.test(phone)) showError(phoneInput, "Enter valid 10-digit number");
-
+    
         if (!email) showError(emailInput, "Email is required");
         else if (!/^\S+@\S+\.\S+$/.test(email)) showError(emailInput, "Invalid email");
-
+    
         if (!type) showError(typeInput, "Select a service");
         if (!date) showError(dateInput, "Choose a date");
         if (!message) showError(messageInput, "Message cannot be empty");
-
+    
+        // 🔥 HANDLE "OTHERS"
+        let finalType = type;
+    
+        if (type === "Others") {
+            const otherValue = otherInput.value.trim();
+    
+            if (!otherValue) {
+                showError(otherInput, "Please specify your shoot");
+            } else {
+                finalType = "Other: " + otherValue;
+            }
+        }
+    
         // 🚫 STOP if errors
         if (firstInvalid) {
-            firstInvalid.focus(); // 📱 auto focus 🔥
+            firstInvalid.focus();
             return;
         }
-
+    
         // ✅ Build message
         const text = `Hello, I want to book a shoot.
     
     Name: ${name}
     Phone: ${phone}
     Email: ${email}
-    Type: ${type}
+    Type: ${finalType}
     Preferred Date: ${date}
     Message: ${message}`;
-
+    
         const encodedText = encodeURIComponent(text);
-        const whatsappNumber = "918927907575";
+        const whatsappNumber = "919474799731";
         const url = `https://wa.me/${whatsappNumber}?text=${encodedText}`;
-
+    
         // 🎨 SUCCESS ANIMATION
         btn.textContent = "✓ Sent";
         btn.style.background = "#2d7a3a";
         btn.style.transform = "scale(0.96)";
         btn.disabled = true;
-
+    
         setTimeout(() => {
             window.location.href = url;
         }, 1500);
     };
+
+    // 🔥 SHOW / HIDE "OTHERS" INPUT
+    const shootSelect = document.getElementById("shootType");
+    const otherWrap = document.getElementById("otherShootWrap");
+
+    if (shootSelect && otherWrap) {
+        shootSelect.addEventListener("change", () => {
+            if (shootSelect.value === "Others") {
+                otherWrap.style.display = "block";
+            } else {
+                otherWrap.style.display = "none";
+            }
+        });
+    }
 
     /* ═══════════════════════════════
        REVIEW SLIDER

@@ -386,7 +386,7 @@ button,
 
 .hero-h1 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3.5rem, 6vw, 2rem);
+  font-size: clamp(3.5rem, 6vw, 4rem);
   font-weight: 300;
   line-height: 1.05;
   color: var(--tx-head);
@@ -3163,6 +3163,38 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   .insta-cell:nth-child(n+3) {
     display: none;
   }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+
+  .home-hero {
+    height: auto !important;
+    min-height: 100svh;
+    padding: 20px 20px;
+    overflow-y: auto;
+  }
+
+  .hero-content {
+    position: relative !important;
+    top: auto !important;
+    transform: none !important;
+    gap: 16px;
+  }
+
+  .hero-left h1 {
+    font-size: 28px !important;
+    line-height: 1.2;
+  }
+
+  .hero-sub {
+    font-size: 13px;
+  }
+
+  .cta-row {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
 }
 
 /* ===== REVIEW SLIDER ===== */

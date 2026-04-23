@@ -386,7 +386,7 @@ button,
 
 .hero-h1 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3.5rem, 6vw, 6rem);
+  font-size: clamp(3.5rem, 6vw, 4rem);
   font-weight: 300;
   line-height: 1.05;
   color: var(--tx-head);

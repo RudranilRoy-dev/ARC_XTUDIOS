@@ -7,6 +7,29 @@ document.addEventListener("DOMContentLoaded", () => {
         const res = await fetch("images.json");
         const images = await res.json();
 
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        const savedOrder = localStorage.getItem("galleryOrder");
+
+        if (savedOrder) {
+            const order = JSON.parse(savedOrder);
+
+            // sort images based on saved order
+            images.sort((a, b) => order.indexOf(a.src) - order.indexOf(b.src));
+        } else {
+            // shuffle only first time
+            shuffle(images);
+
+            // save order
+            const order = images.map(img => img.src);
+            localStorage.setItem("galleryOrder", JSON.stringify(order));
+        }
+
         const gallery = document.querySelector(".gallery");
         gallery.innerHTML = "";
 
@@ -215,17 +238,86 @@ document.addEventListener("DOMContentLoaded", () => {
        CONTACT FORM
     ═══════════════════════════════ */
     window.handleForm = function (e) {
+        e.preventDefault();
+
         const btn = e.currentTarget;
-        const orig = btn.textContent;
-        btn.textContent = 'Sent ✓';
-        btn.style.background = '#2d7a3a';
+
+        const nameInput = document.querySelector('input[placeholder="Your name"]');
+        const phoneInput = document.querySelector('input[type="tel"]');
+        const emailInput = document.querySelector('input[type="email"]');
+        const typeInput = document.querySelector('.f-select');
+        const dateInput = document.querySelector('input[type="date"]');
+        const messageInput = document.querySelector('.f-ta');
+
+        const inputs = [nameInput, phoneInput, emailInput, typeInput, dateInput, messageInput];
+
+        let firstInvalid = null;
+
+        // 🔄 Clear previous errors
+        inputs.forEach(input => {
+            input.classList.remove("error");
+            const error = input.parentElement.querySelector(".f-error");
+            error.textContent = "";
+            error.classList.remove("show");
+        });
+
+        // ❌ VALIDATION FUNCTION
+        function showError(input, message) {
+            const error = input.parentElement.querySelector(".f-error");
+            input.classList.add("error");
+            error.textContent = message;
+            error.classList.add("show");
+
+            if (!firstInvalid) firstInvalid = input;
+        }
+
+        const name = nameInput.value.trim();
+        const phone = phoneInput.value.trim();
+        const email = emailInput.value.trim();
+        const type = typeInput.value;
+        const date = dateInput.value;
+        const message = messageInput.value.trim();
+
+        if (!name) showError(nameInput, "Name is required");
+        if (!phone) showError(phoneInput, "Phone is required");
+        else if (!/^[0-9]{10}$/.test(phone)) showError(phoneInput, "Enter valid 10-digit number");
+
+        if (!email) showError(emailInput, "Email is required");
+        else if (!/^\S+@\S+\.\S+$/.test(email)) showError(emailInput, "Invalid email");
+
+        if (!type) showError(typeInput, "Select a service");
+        if (!date) showError(dateInput, "Choose a date");
+        if (!message) showError(messageInput, "Message cannot be empty");
+
+        // 🚫 STOP if errors
+        if (firstInvalid) {
+            firstInvalid.focus(); // 📱 auto focus 🔥
+            return;
+        }
+
+        // ✅ Build message
+        const text = `Hello, I want to book a shoot.
+    
+    Name: ${name}
+    Phone: ${phone}
+    Email: ${email}
+    Type: ${type}
+    Preferred Date: ${date}
+    Message: ${message}`;
+
+        const encodedText = encodeURIComponent(text);
+        const whatsappNumber = "918927907575";
+        const url = `https://wa.me/${whatsappNumber}?text=${encodedText}`;
+
+        // 🎨 SUCCESS ANIMATION
+        btn.textContent = "✓ Sent";
+        btn.style.background = "#2d7a3a";
+        btn.style.transform = "scale(0.96)";
         btn.disabled = true;
 
         setTimeout(() => {
-            btn.textContent = orig;
-            btn.style.background = '';
-            btn.disabled = false;
-        }, 3000);
+            window.location.href = url;
+        }, 1500);
     };
 
     /* ═══════════════════════════════

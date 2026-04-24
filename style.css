@@ -1571,7 +1571,7 @@ button,
 .footer-nav-col ul a {
   font-size: 82rem;
   font-size: .82rem;
-  color: rgba(154, 133, 117, .52);
+  color: rgba(230, 210, 190, 0.85);
   text-decoration: none;
   transition: color .3s;
   font-weight: 300;
@@ -1590,19 +1590,19 @@ button,
   font-size: .56rem;
   letter-spacing: .26em;
   text-transform: uppercase;
-  color: rgba(201, 169, 110, .3);
+  color: rgba(201, 169, 110, 0.65);
   display: block;
   margin-bottom: 3px;
 }
 
 .fci-val {
   font-size: .82rem;
-  color: rgba(154, 133, 117, .6);
+  color: rgba(240, 220, 200, 0.9);
   font-weight: 300;
 }
 
 .fci-link {
-  color: rgba(154, 133, 117, .6);
+  color: rgba(240, 220, 200, 0.9);
   text-decoration: none;
   transition: color .3s;
 }
@@ -1644,7 +1644,7 @@ button,
 
 .footer-copy {
   font-size: .66rem;
-  color: rgba(94, 74, 60, .55);
+  color: rgba(200, 180, 160, 0.7);
   letter-spacing: .1em;
   font-weight: 300;
 }
@@ -1658,7 +1658,7 @@ button,
   font-size: .62rem;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: rgba(94, 74, 60, .5);
+  color: rgba(200, 180, 160, 0.75);
   text-decoration: none;
   transition: color .3s;
   cursor: pointer;
@@ -1670,7 +1670,7 @@ button,
 
 .footer-made {
   font-size: .62rem;
-  color: rgba(94, 74, 60, .4);
+  color: rgba(200, 180, 160, 0.6);
   letter-spacing: .1em;
 }
 

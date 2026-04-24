@@ -75,12 +75,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 5000);
     }
 
-    /* ═══════════════════════════════
-       NAVIGATION
-    ═══════════════════════════════ */
+     /* ═══════════════════════════════
+   NAVIGATION (WITH BACK BUTTON FIX)
+═══════════════════════════════ */
+
     let cur = 'home';
 
-    window.go = function (page) {
+    window.go = function (page, addToHistory = true) {
         if (page === cur) return;
 
         closeLb();
@@ -101,11 +102,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.getElementById('nav').classList.toggle('on-dark', page === 'home');
 
+        // 🔥 ADD HISTORY SUPPORT
+        if (addToHistory) {
+            history.pushState({ page }, "", "#" + page);
+        }
+
         cur = page;
     };
 
+    // ✅ HANDLE BACK / FORWARD BUTTON
+    window.addEventListener("popstate", (e) => {
+        const page = e.state?.page || location.hash.replace("#", "") || "home";
+        go(page, false);
+    });
+
+    // ✅ LOAD PAGE FROM URL ON REFRESH
+    document.addEventListener("DOMContentLoaded", () => {
+        const initialPage = location.hash.replace("#", "") || "home";
+        go(initialPage, false);
+    });
+
+    // KEEP THIS
     document.getElementById('nav').classList.add('on-dark');
 
+    
     /* ═══════════════════════════════
        MOBILE MENU
     ═══════════════════════════════ */
